@@ -15,6 +15,7 @@ module.exports = function(grunt) {
         defaultPriority = (config.data.sitemap_priorities !== undefined)? config.data.sitemap_priorities._DEFAULT_ : '0.5',
         generateSitemap = config.data.generateSitemap != undefined ? config.data.generateSitemap : true,
         generateRobotstxt = config.data.generateRobotstxt != undefined ? config.data.generateSitemap : true,
+        defaultGlobalVarSrc = config.data.defaultGlobalVarSrc != undefined ? config.data.defaultGlobalVarSrc || '/global.json'
         globalVars = {};
 
     if (config.data.init !== undefined) {
@@ -22,7 +23,7 @@ module.exports = function(grunt) {
     }
 
     try {
-      globalVars = grunt.util._.extend(config.data, grunt.file.readJSON(process.cwd() + '/global.json'));
+      globalVars = grunt.util._.extend(config.data, grunt.file.readJSON(process.cwd() + defaultGlobalVarSrc));
     } catch (err) {
       globalVars = grunt.util._.clone(config.data);
     }
