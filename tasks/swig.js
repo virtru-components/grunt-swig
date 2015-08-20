@@ -16,7 +16,7 @@ module.exports = function(grunt) {
         generateSitemap = config.data.generateSitemap != undefined ? config.data.generateSitemap : true,
         generateRobotstxt = config.data.generateRobotstxt != undefined ? config.data.generateSitemap : true,
         // Added this config option to define where to look for the global template variables
-        defaultGlobalVarSrc = config.data.defaultGlobalVarSrc != undefined ? config.data.defaultGlobalVarSrc : '/global.json'
+        defaultGlobalVarSrc = config.data.defaultGlobalVarSrc != undefined ? config.data.defaultGlobalVarSrc : '/global.json',
         globalVars = {};
 
     if (config.data.init !== undefined) {
