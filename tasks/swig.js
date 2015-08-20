@@ -15,13 +15,15 @@ module.exports = function(grunt) {
         defaultPriority = (config.data.sitemap_priorities !== undefined)? config.data.sitemap_priorities._DEFAULT_ : '0.5',
         generateSitemap = config.data.generateSitemap != undefined ? config.data.generateSitemap : true,
         generateRobotstxt = config.data.generateRobotstxt != undefined ? config.data.generateSitemap : true,
-        defaultGlobalVarSrc = config.data.defaultGlobalVarSrc != undefined ? config.data.defaultGlobalVarSrc || '/global.json'
+        // Added this config option to define where to look for the global template variables
+        defaultGlobalVarSrc = config.data.defaultGlobalVarSrc != undefined ? config.data.defaultGlobalVarSrc : '/global.json'
         globalVars = {};
 
     if (config.data.init !== undefined) {
       swig.setDefaults(config.data.init);
     }
 
+    // Global file that can be used for all templates
     try {
       globalVars = grunt.util._.extend(config.data, grunt.file.readJSON(process.cwd() + defaultGlobalVarSrc));
     } catch (err) {
@@ -41,6 +43,7 @@ module.exports = function(grunt) {
             tplVars = {},
             contextVars = {};
 
+        // Looks for a .json file with the same name as the swig file it is processing
         try {
           tplVars = grunt.file.readJSON(path.dirname(file) + '/' + outputFile + ".json");
         } catch(err) {
